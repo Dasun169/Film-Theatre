@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starlight Cinema</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .header{
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px;
+            background-color: #1B1B1B;
+        }
+
+        .header img{
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 500px; 
+            margin: 20px auto; 
+            box-shadow: white;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 10px; 
+            color: #aaa; 
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 10px 10px 35px; 
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #333; 
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div><img src="Images/logo.png" alt="Startlight Cinema"></div>
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search Movies..." class="search-input">
+        </div>
+        <div><img src="Images/logo.png" alt="Startlight Cinema"></div>
+    </div>
+    <div class="body-1">
+        <div class="row">
+            <div class="movie" style="background-image: url('https://originserver-static1-uat.pvrcinemas.com/newweb/movies/thumb/374x226/HO00028687.jpg?v=9');"> alt=""></div>
+            <div class="movie" style="background-image:url('https://originserver-static1-uat.pvrcinemas.com/newweb/movies/thumb/374x226/HO00028574.jpg?v=9');"> alt=""></div>
+            <div class="movie" style="background-image:url('https://originserver-static1-uat.pvrcinemas.com/newweb/movies/thumb/374x226/HO00028738.jpg?v=9');"> alt=""></div>
+            <div class="movie" style="background-image:url('https://originserver-static1-uat.pvrcinemas.com/newweb/movies/thumb/374x226/HO00027894.jpg?v=9');"> alt=""></div>
+        </div>
+    </div>
+    <div class="footer">
+
+    </div>
+</body>
+</html>
+
