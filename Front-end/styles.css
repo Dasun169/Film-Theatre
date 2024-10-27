@@ -1,0 +1,123 @@
+/* CSS Styles */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    background-color: #080808;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.movie-card {
+    position: relative;
+    width: 22%;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.movie-thumbnail {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+}
+
+.movie-info {
+    position: absolute;
+    bottom: 10px;
+    /* Moved lower on the image */
+    left: 15px;
+    color: #fff;
+    /*padding: 5px;*/
+    font-family: 'Poppins', sans-serif;
+    /* Stylish font */
+    text-align: left;
+    transition: opacity 0.3s ease;
+    background: none;
+    /* No background color */
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.973);
+    /* Increased shadow effect */
+}
+
+.buttons {
+    display: none;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.movie-card:hover .movie-thumbnail {
+    transform: scale(1.1);
+}
+
+.movie-card:hover .buttons {
+    display: flex;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    color: #000;
+    /* Black font color */
+    background-color: #fff;
+    /* White background color */
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    /* Matching font */
+}
+
+.btn-book {
+    background-color: #fff;
+}
+
+.btn-trailer {
+    background-color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #1B1B1B;
+}
+
+.header img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 500px;
+    margin: 20px auto;
+    box-shadow: white;
+}
+
+.search-container i {
+    position: absolute;
+    left: 10px;
+    color: #aaa;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #333;
+}
