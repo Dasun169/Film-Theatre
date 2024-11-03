@@ -9,16 +9,30 @@ async function loadMovies() {
       movieCard.classList.add("movie-card");
 
       movieCard.innerHTML = `
-                <img src="${movie.thumbnail}" alt="${movie.title}" class="movie-thumbnail">
-                <div class="movie-info">
-                    <h4>${movie.title}</h4>
-                    <p>${movie.category} | ${movie.language}</p>
-                    <div class="buttons">
-                        <button class="btn btn-book">Book Tickets</button>
-                        <button class="btn btn-trailer" onclick="window.open('${movie.trailerVideo}', '_blank')">Watch Trailer</button>
-                    </div>
-                </div>
-            `;
+        <img src="${movie.thumbnail}" alt="${
+        movie.title
+      }" class="movie-thumbnail">
+        <div class="movie-info">
+          <h4>${movie.title}</h4>
+          <p>${movie.category} | ${movie.language}</p>
+          <div class="buttons">
+            <button 
+              class="btn btn-book" 
+              onclick="window.location.href='book-ticket.html?title=${encodeURIComponent(
+                movie.title
+              )}&category=${encodeURIComponent(
+        movie.category
+      )}&language=${encodeURIComponent(
+        movie.language
+      )}&thumbnail=${encodeURIComponent(movie.thumbnail)}'">
+              Book Tickets
+            </button>
+            <button class="btn btn-trailer" onclick="window.open('${
+              movie.trailerVideo
+            }', '_blank')">Watch Trailer</button>
+          </div>
+        </div>
+      `;
 
       gallery.appendChild(movieCard);
     });
@@ -26,5 +40,7 @@ async function loadMovies() {
     console.error("Error fetching movies:", error);
   }
 }
+
+
 
 window.onload = loadMovies;
