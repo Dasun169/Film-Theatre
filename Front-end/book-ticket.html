@@ -30,22 +30,24 @@
         </div>
 
         <div class="booking-details">
+            <p>Date Range:</p>
             <p id="dateRange"></p>
         
-            <label for="dateSelector">Select Date:</label>
+            <label for="dateSelector">Select Date:</label><br>
             <select id="dateSelector" required>
                 
             </select>
         
             <div>
+                <br>
                 <label for="timeSlotsContainer">Time Slots:</label>
-                <select id="timeSlotsContainer" required>
-                    
-                </select>
+                <div class="timeSlotsContainer">
+
+                </div>
             </div>
-        
+            <br>
             <label for="numSeats">Number of Seats (2-10):</label>
-            <input type="number" id="numSeats" name="numSeats" min="2" max="10" required>
+            <input type="number" id="numSeats" name="numSeats" min="2" max="10" required><br><br>
         
             <button id="bookTicketButton">Book Ticket</button>
         </div>
@@ -91,6 +93,7 @@
         const movieCategory = urlParams.get('category');
         const movieLanguage = urlParams.get('language');
         const movieThumbnail = urlParams.get('thumbnail');
+        const timeSlot = "";
 
         document.getElementById('movieTitle').innerText = movieTitle ? `Title: ${movieTitle}` : "Movie Title";
         document.getElementById('movieCategory').innerText = movieCategory ? `Category: ${movieCategory}` : "Category";
@@ -101,7 +104,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             const movieTitle = urlParams.get('title');
 
-            // Fetch booking details when the page loads
             fetch(`http://localhost:8080/api/booking/${movieTitle}`)
                 .then(response => {
                     if (!response.ok) {
@@ -111,15 +113,13 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Check if the data contains start_date and end_date
                     if (data && data.start_date && data.end_date) {
                         const startDate = new Date(data.start_date);
                         const endDate = new Date(data.end_date);
 
-                        const dateRangeText = `Date Range: ${data.start_date} to ${data.end_date}`;
+                        const dateRangeText = `${data.start_date} to ${data.end_date}`;
                         document.getElementById('dateRange').textContent = dateRangeText;
 
-                        // Populate dateSelector with dates between startDate and endDate
                         populateDateSelector(startDate, endDate);
                     } else {
                         document.getElementById('dateRange').textContent = 'Date range not available.';
@@ -129,31 +129,29 @@
                     console.error('Error fetching booking details:', error);
                     document.getElementById('dateRange').textContent = 'Error fetching date range: ' + error.message;
                 });
+
+            populateTimeSlots(movieTitle);
+
         });
 
-        // Function to populate date selector with dates between startDate and endDate
         function populateDateSelector(startDate, endDate) {
             const dateSelector = document.getElementById('dateSelector');
 
-            // Clear existing options
             dateSelector.innerHTML = '';
 
-            // Loop through the dates and create options
             for (let dt = new Date(startDate); dt <= endDate; dt.setDate(dt.getDate() + 1)) {
                 const option = document.createElement('option');
-                const formattedDate = dt.toISOString().split('T')[0]; // Format: YYYY-MM-DD
-                option.value = formattedDate; // Set value to the date
-                option.textContent = formattedDate; // Set display text
-                dateSelector.appendChild(option); // Append the option to the select
+                const formattedDate = dt.toISOString().split('T')[0]; 
+                option.value = formattedDate; 
+                option.textContent = formattedDate; 
+                dateSelector.appendChild(option); 
             }
         }
 
-        // Function to populate time slots based on movie title
         function populateTimeSlots(movieTitle) {
-            const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+            const timeSlotsContainer = document.querySelector('.timeSlotsContainer'); 
 
-            // Fetch available time slots for the selected movie from the API
-            fetch(`http://localhost:8080/api/booking/timeSlots/${movieTitle}`)
+            fetch(`http://localhost:8080/api/booking/timeSlots/${encodeURIComponent(movieTitle)}`)
                 .then(response => {
                     if (!response.ok) {
                         console.error(`HTTP error! status: ${response.status}`);
@@ -162,30 +160,96 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Clear existing options
                     timeSlotsContainer.innerHTML = '';
 
-                    // Check if the data contains time slots
-                    if (data && Array.isArray(data.time_slots) && data.time_slots.length > 0) {
-                        data.time_slots.forEach(slot => {
-                            const option = document.createElement('option');
-                            option.value = slot; // Set value to the time slot
-                            option.textContent = slot; // Set display text
-                            timeSlotsContainer.appendChild(option); // Append the option to the select
+                    if (data && Array.isArray(data) && data.length > 0) {
+                        data.forEach(slot => {
+                            const timeSlotText = document.createElement('div'); 
+                            timeSlotText.textContent = slot; 
+                            timeSlotText.className = 
+                            timeSlotsContainer.appendChild(timeSlotText); 
                         });
                     } else {
-                        const option = document.createElement('option');
-                        option.textContent = 'No time slots available.';
-                        timeSlotsContainer.appendChild(option); // Append a message if no slots available
+                        const message = document.createElement('div');
+                        message.textContent = 'No time slots available.';
+                        timeSlotsContainer.appendChild(message); 
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching time slots:', error);
-                    const option = document.createElement('option');
-                    option.textContent = 'Error fetching time slots.';
-                    timeSlotsContainer.appendChild(option); // Append a message in case of error
+                    const message = document.createElement('div');
+                    message.textContent = 'Error fetching time slots.';
+                    timeSlotsContainer.appendChild(message); 
                 });
         }
+
+
+
+
+
+        
+        document.getElementById('bookTicketButton').addEventListener('click', function () {
+            const title = movieTitle;
+            const movieDate = document.getElementById('dateSelector').value;
+            const numSeats = document.getElementById('numSeats').value;
+            let timeSlot = ''; // Declare timeSlot with let to allow reassignment
+
+            // Fetch the time slot for the specified movie title
+            fetch(`http://localhost:8080/api/booking/timeSlots/${encodeURIComponent(title)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        console.error(`HTTP error! status: ${response.status}`);
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && typeof data === 'string') {
+                        timeSlot = data; // Assign the retrieved time slot
+                        console.log('Retrieved Time Slot:', timeSlot); // Display the retrieved time slot
+
+                        // Check if all fields are filled after time slot retrieval
+                        if (!title || !movieDate || !numSeats || !timeSlot) {
+                            alert('Please fill in all fields.');
+                            return;
+                        }
+
+                        const ticketData = {
+                            title: title,
+                            movie_date: movieDate,
+                            time_slot: timeSlot,
+                            num_of_sets: numSeats
+                        };
+
+                        // Send the ticket data to the server
+                        return fetch('http://localhost:8080/api/tickets', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(ticketData),
+                        });
+                    } else {
+                        console.log('No time slot available for this movie.');
+                        alert('No time slot available for this movie.');
+                    }
+                })
+                .then(response => {
+                    if (response && !response.ok) {
+                        throw new Error('Failed to save ticket');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Ticket booked successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error booking ticket: ' + error.message);
+                });
+        });
+
+
 
     </script>
     

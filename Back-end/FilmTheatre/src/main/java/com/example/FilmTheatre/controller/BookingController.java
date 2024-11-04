@@ -30,4 +30,8 @@ public class BookingController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/timeSlots/{title}")
+    public List<String> getTimeSlots(@PathVariable("title") String title) {
+        return bookingService.getDistinctTimeSlotsByTitle(title);
+    }
 }

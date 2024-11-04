@@ -8,4 +8,6 @@ import java.util.List;
 public interface BookingService {
     void saveBookingIfNotExists(Booking booking);
     Optional<Booking> getBookingByTitle(String title);
+
+    List<String> getDistinctTimeSlotsByTitle(String title);
 }

@@ -62,13 +62,10 @@ body{
     padding: 5px 10px;
     border: none;
     color: #000;
-    /* Black font color */
     background-color: #fff;
-    /* White background color */
     cursor: pointer;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
-    /* Matching font */
 }
 
 .btn-book {
@@ -211,4 +208,36 @@ body{
 .movie-details img{
     height: 250px;
     width: 375px;
+}
+
+.booking-details select{
+    height: 35px;
+    width: 200px;
+    border-radius: 1cap;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    background-color: #333;
+    color: white;
+    border: 2px solid #1B1B1B;
+}
+
+.booking-details button{
+    height: 35px;
+    width: 200px;
+    border-radius: 1cap;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    background-color: #333;
+    color: white;
+    border: 2px solid #1B1B1B;
+}
+
+.booking-details input{
+    height: 25px;
+    width: 50px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    background-color: #333;
+    color: white;
+    border: 2px solid #1B1B1B;
 }
