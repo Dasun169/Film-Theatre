@@ -93,7 +93,7 @@
         const movieCategory = urlParams.get('category');
         const movieLanguage = urlParams.get('language');
         const movieThumbnail = urlParams.get('thumbnail');
-        const timeSlot = "";
+        let timeSlot;
 
         document.getElementById('movieTitle').innerText = movieTitle ? `Title: ${movieTitle}` : "Movie Title";
         document.getElementById('movieCategory').innerText = movieCategory ? `Category: ${movieCategory}` : "Category";
@@ -130,7 +130,7 @@
                     document.getElementById('dateRange').textContent = 'Error fetching date range: ' + error.message;
                 });
 
-            populateTimeSlots(movieTitle);
+            populateTimeSlot(movieTitle);
 
         });
 
@@ -148,109 +148,81 @@
             }
         }
 
-        function populateTimeSlots(movieTitle) {
-            const timeSlotsContainer = document.querySelector('.timeSlotsContainer'); 
-
-            fetch(`http://localhost:8080/api/booking/timeSlots/${encodeURIComponent(movieTitle)}`)
+        function populateTimeSlot(movieTitle) {
+            return fetch(`http://localhost:8080/api/booking/timeSlots/${encodeURIComponent(movieTitle)}`)
                 .then(response => {
                     if (!response.ok) {
-                        console.error(`HTTP error! status: ${response.status}`);
+                        console.error(`HTTP error! Status: ${response.status}`);
                         throw new Error('Network response was not ok');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    timeSlotsContainer.innerHTML = '';
+                    console.log('Fetched data:', data); 
 
-                    if (data && Array.isArray(data) && data.length > 0) {
-                        data.forEach(slot => {
-                            const timeSlotText = document.createElement('div'); 
-                            timeSlotText.textContent = slot; 
-                            timeSlotText.className = 
-                            timeSlotsContainer.appendChild(timeSlotText); 
-                        });
-                    } else {
-                        const message = document.createElement('div');
-                        message.textContent = 'No time slots available.';
-                        timeSlotsContainer.appendChild(message); 
+                    if (!data || (typeof data !== 'string' && !Array.isArray(data))) {
+                        throw new Error('No time slot available for this movie.');
                     }
+
+                    timeSlot = Array.isArray(data) ? data[0] : data; 
+
+                    const timeSlotsContainer = document.querySelector('.timeSlotsContainer');
+                    timeSlotsContainer.innerHTML = `<div>${timeSlot}</div>`;
+
+                    return timeSlot; 
                 })
                 .catch(error => {
-                    console.error('Error fetching time slots:', error);
-                    const message = document.createElement('div');
-                    message.textContent = 'Error fetching time slots.';
-                    timeSlotsContainer.appendChild(message); 
+                    console.error('Error fetching time slot:', error);
+                    alert('Error fetching time slot: ' + error.message);
                 });
         }
 
-
-
-
-
-        
         document.getElementById('bookTicketButton').addEventListener('click', function () {
-            const title = movieTitle;
-            const movieDate = document.getElementById('dateSelector').value;
-            const numSeats = document.getElementById('numSeats').value;
-            let timeSlot = ''; // Declare timeSlot with let to allow reassignment
+            const title = document.getElementById('movieTitle').innerText.replace("Title: ", ""); 
+            const movieDate = document.getElementById('dateSelector').value; 
+            const numSeats = document.getElementById('numSeats').value; 
 
-            // Fetch the time slot for the specified movie title
-            fetch(`http://localhost:8080/api/booking/timeSlots/${encodeURIComponent(title)}`)
+            if (!title || !movieDate || !numSeats) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            if (!timeSlot) {
+                alert('No time slot available for this movie.');
+                return;
+            }
+
+            const ticketData = {
+                title: title,
+                movie_date: movieDate,
+                time_slot: timeSlot,
+                num_of_sets: numSeats
+            };
+
+            fetch('http://localhost:8080/api/tickets', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(ticketData),
+            })
                 .then(response => {
                     if (!response.ok) {
-                        console.error(`HTTP error! status: ${response.status}`);
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data && typeof data === 'string') {
-                        timeSlot = data; // Assign the retrieved time slot
-                        console.log('Retrieved Time Slot:', timeSlot); // Display the retrieved time slot
-
-                        // Check if all fields are filled after time slot retrieval
-                        if (!title || !movieDate || !numSeats || !timeSlot) {
-                            alert('Please fill in all fields.');
-                            return;
-                        }
-
-                        const ticketData = {
-                            title: title,
-                            movie_date: movieDate,
-                            time_slot: timeSlot,
-                            num_of_sets: numSeats
-                        };
-
-                        // Send the ticket data to the server
-                        return fetch('http://localhost:8080/api/tickets', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(ticketData),
-                        });
-                    } else {
-                        console.log('No time slot available for this movie.');
-                        alert('No time slot available for this movie.');
-                    }
-                })
-                .then(response => {
-                    if (response && !response.ok) {
                         throw new Error('Failed to save ticket');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    alert('Ticket booked successfully!');
+                    const ticketId = data.id;
+                    window.location.href = 'booking.html';
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Error booking ticket: ' + error.message);
                 });
+
+
         });
-
-
-
     </script>
     
 </body>
