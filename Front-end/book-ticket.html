@@ -214,14 +214,12 @@
                 })
                 .then(data => {
                     const ticketId = data.id;
-                    window.location.href = 'booking.html';
+                    window.location.href = `booking.html?title=${title}`;
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Error booking ticket: ' + error.message);
                 });
-
-
         });
     </script>
     
