@@ -203,7 +203,23 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const title = urlParams.get('title');
-        alert(`Ticket ID: ${title}`);
+        const movieDate = urlParams.get('movieDate');
+        const numOfSeats = urlParams.get('numSeats');
+        let bookingId;
+        //alert(`Title: ${title}\nMovie Date: ${movieDate}\nNumber of Seats: ${numOfSeats}`);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const prefix = "STC";
+            let currentNumber = localStorage.getItem('currentBookingId') || 1; 
+            bookingId = prefix + String(currentNumber).padStart(6, '0'); 
+
+            alert(`Booking ID: ${bookingId}`);
+
+            localStorage.setItem('currentBookingId', Number(currentNumber) + 1); 
+        });
+
+        
+
     </script>
 </body>
 </html>

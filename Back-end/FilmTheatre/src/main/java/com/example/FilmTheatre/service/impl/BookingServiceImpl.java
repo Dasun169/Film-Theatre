@@ -1,11 +1,8 @@
 package com.example.FilmTheatre.service.impl;
 
 import com.example.FilmTheatre.model.Booking;
-import com.example.FilmTheatre.model.Movie;
 import com.example.FilmTheatre.repository.BookingRepository;
-import com.example.FilmTheatre.repository.MovieRepository;
 import com.example.FilmTheatre.service.BookingService;
-import com.example.FilmTheatre.service.MovieService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

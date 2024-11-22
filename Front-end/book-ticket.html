@@ -187,11 +187,6 @@
                 return;
             }
 
-            if (!timeSlot) {
-                alert('No time slot available for this movie.');
-                return;
-            }
-
             const ticketData = {
                 title: title,
                 movie_date: movieDate,
@@ -214,7 +209,7 @@
                 })
                 .then(data => {
                     const ticketId = data.id;
-                    window.location.href = `booking.html?title=${title}`;
+                    window.location.href = `booking.html?title=${encodeURIComponent(title)}&movieDate=${encodeURIComponent(movieDate)}&numSeats=${encodeURIComponent(numSeats) }`;
                 })
                 .catch(error => {
                     console.error('Error:', error);
