@@ -20,4 +20,9 @@ public class PaymentController {
     public ResponseEntity<Payment> savePayment(@RequestBody Payment payment){
         return new ResponseEntity<Payment>(paymentService.savePayment(payment), HttpStatus.CREATED);
     }
+
+    @GetMapping("{bookingId}")
+    public ResponseEntity<Payment> getPaymentByBookingId(@PathVariable("bookingId") String bookingId){
+        return new ResponseEntity<Payment>(paymentService.getPaymentByBookingId(bookingId), HttpStatus.OK);
+    }
 }

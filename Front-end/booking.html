@@ -201,10 +201,11 @@
     </div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const title = urlParams.get('title');
-        const movieDate = urlParams.get('movieDate');
-        const numOfSeats = urlParams.get('numSeats');
+        let urlParams = new URLSearchParams(window.location.search);
+        let title = urlParams.get('title');
+        let timeSlot = urlParams.get('timeSlot');
+        let movieDate = urlParams.get('movieDate');
+        let numOfSeats = urlParams.get('numSeats');
         let bookingId;
         //alert(`Title: ${title}\nMovie Date: ${movieDate}\nNumber of Seats: ${numOfSeats}`);
 
@@ -216,6 +217,36 @@
             alert(`Booking ID: ${bookingId}`);
 
             localStorage.setItem('currentBookingId', Number(currentNumber) + 1); 
+
+
+            
+            const apiEndpoint = `http://localhost:8080/api/bookingSeat/seat/${movieDate}/${timeSlot}`;
+
+            fetch(apiEndpoint)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(seatNos => {
+                    console.log("Retrieved seat numbers:", seatNos);
+
+                    seatNos.forEach(seatNo => {
+                        const seatButton = document.getElementById(`${seatNo}`);
+                        if (seatButton) {
+                            seatButton.style.backgroundColor = 'orange';  
+                            seatButton.disabled = true;  
+                        }
+                    });
+
+                })
+                .catch(error => {
+                    console.error("Error fetching seat numbers:", error);
+                    alert("Error fetching seat data. Please try again.");
+                });
+
+        
         });
 
         
