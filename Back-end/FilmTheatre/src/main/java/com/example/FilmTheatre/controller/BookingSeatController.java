@@ -24,6 +24,12 @@ public class BookingSeatController {
         return new ResponseEntity<BookingSeat>(bookingSeatService.saveBookingSeat(bookingSeat), HttpStatus.CREATED);
     }
 
+    @PostMapping("/all")
+    public ResponseEntity<List<BookingSeat>> saveBookingSeats(@RequestBody List<BookingSeat> bookingSeats) {
+        List<BookingSeat> savedSeats = bookingSeatService.saveAllBookingSeats(bookingSeats);
+        return new ResponseEntity<>(savedSeats, HttpStatus.CREATED);
+    }
+
     @GetMapping("{movieDate}/{timeSlot}")
     public ResponseEntity<List<BookingSeat>> getBookingSeatByMovieDateAndTimeSlot(@PathVariable("movieDate") String movieDate, @PathVariable("timeSlot") String timeSlot) {
         List<BookingSeat> bookingSeats = bookingSeatService.getBookingSeatByMovieDateAndTimeSlot(movieDate, timeSlot);

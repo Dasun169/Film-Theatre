@@ -205,21 +205,17 @@
         let title = urlParams.get('title');
         let timeSlot = urlParams.get('timeSlot');
         let movieDate = urlParams.get('movieDate');
-        let numOfSeats = urlParams.get('numSeats');
+        let numOfSeats = parseInt(urlParams.get('numSeats'), 10);
         let bookingId;
-        //alert(`Title: ${title}\nMovie Date: ${movieDate}\nNumber of Seats: ${numOfSeats}`);
+        let selectedSeats = [];
 
         document.addEventListener('DOMContentLoaded', function () {
             const prefix = "STC";
             let currentNumber = localStorage.getItem('currentBookingId') || 1; 
             bookingId = prefix + String(currentNumber).padStart(6, '0'); 
 
-            alert(`Booking ID: ${bookingId}`);
-
             localStorage.setItem('currentBookingId', Number(currentNumber) + 1); 
 
-
-            
             const apiEndpoint = `http://localhost:8080/api/bookingSeat/seat/${movieDate}/${timeSlot}`;
 
             fetch(apiEndpoint)
@@ -243,10 +239,102 @@
                 })
                 .catch(error => {
                     console.error("Error fetching seat numbers:", error);
-                    alert("Error fetching seat data. Please try again.");
                 });
+            
+            
 
-        
+
+            
+            const seatButtons = document.querySelectorAll('.seat');
+            seatButtons.forEach(seatButton => {
+                seatButton.addEventListener('click', function () {
+                    if (this.disabled) return;
+
+                    if (this.style.backgroundColor === 'orange') {
+                        this.style.backgroundColor = ''; 
+                        const index = selectedSeats.indexOf(this.id);
+                        if (index > -1) {
+                            selectedSeats.splice(index, 1); 
+                        }
+                    } else {
+                        if (selectedSeats.length < numOfSeats) {
+                            this.style.backgroundColor = 'orange'; 
+                            selectedSeats.push(this.id); 
+                        } else {
+                            alert(`You can only select ${numOfSeats} seats.`);
+                        }
+                    }
+                });
+                console.log(selectedSeats); 
+            });
+
+            const paymentForm = document.getElementById('paymentForm');
+            paymentForm.addEventListener('submit', function (event) {
+                event.preventDefault(); 
+
+                if (selectedSeats.length !== numOfSeats) {
+                    alert(`You select exactly ${selectedSeats.length} seats.`);
+                    return;
+                }
+
+                const formData = new FormData(paymentForm);
+                const paymentData = {
+                    bookingId: bookingId,
+                    cardNo: formData.get('cardNumber'),
+                    movieDate: movieDate,
+                    numOfSeats: String(numOfSeats),
+                    timeSlot: timeSlot,
+                    title: title,
+                    userId: formData.get('userId')
+                };
+
+                fetch('http://localhost:8080/api/payments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(paymentData)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error submitting payment data');
+                        }
+                        return response.json();
+                    })
+                    .then(paymentResponse => {
+                        console.log('Payment Data Submitted:', paymentResponse);
+
+                        const bookingData = selectedSeats.map(seatNo => ({
+                            bookingId: bookingId,
+                            movieDate: movieDate,
+                            seatNo: seatNo,
+                            timeSlot: timeSlot
+                        }));
+
+                        return fetch('http://localhost:8080/api/bookingSeat/all', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(bookingData)
+                        });
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error submitting seat booking data');
+                        }
+                        return response.json();
+                    })
+                    .then(bookingResponse => {
+                        alert('Booking Successful!');
+                        console.log('Seat Booking Data Submitted:', bookingResponse);
+                    })
+                    .catch(error => {
+                        alert('Error during booking submission');
+                        console.error('Error:', error);
+                    });
+            });
+
         });
 
         

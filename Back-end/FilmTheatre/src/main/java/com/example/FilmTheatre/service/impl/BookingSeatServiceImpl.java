@@ -21,6 +21,11 @@ public class BookingSeatServiceImpl implements BookingSeatService{
     }
 
     @Override
+    public List<BookingSeat> saveAllBookingSeats(List<BookingSeat> bookingSeats) {
+        return bookingSeatRepository.saveAll(bookingSeats);
+    }
+
+    @Override
     public List<BookingSeat> getBookingSeatByMovieDateAndTimeSlot(String movieDate, String timeSlot){
         List<BookingSeat> bookingSeat = bookingSeatRepository.findByMovieDateAndTimeSlot(movieDate, timeSlot);
 
