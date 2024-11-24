@@ -33,9 +33,8 @@ Welcome to the **Film Theatre Online Booking System**, a robust and user-friendl
 ---
 
 ## 🚀 Features in Detail  
-1. **Dynamic Search**: Real-time movie search with interactive filters.  
-2. **Secure Booking**: End-to-end secure ticket booking using Spring Security.  
-3. **PDF and QR Code Integration**: Automatically generate PDFs and QR codes for confirmed tickets.  
+1. **Dynamic Search**: Real-time movie search with interactive filters.   
+2. **PDF and QR Code Integration**: Automatically generate PDFs and QR codes for confirmed tickets.  
 
 ---
 
