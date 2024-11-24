@@ -87,8 +87,14 @@ public class MovieServiceImpl implements MovieService {
         saveMovieIfNotExists(new Movie(null, "https://originserver-static1-uat.pvrcinemas.com/newweb/movies/thumb/374x226/HO00020648.jpg?v=9",
                 "PAW PATROL:THE MIGHTY MOVIE", "Animation", "English", "https://youtu.be/UDgjJ9XzgHk"));
     }
+
     @Override
     public Optional<Movie> getMovieByTitle(String title) {
         return movieRepository.findByTitle(title);
+    }
+
+    @Override
+    public List<Movie> searchMoviesByTitle(String title) {
+            return movieRepository.findByTitleStartingWith(title);
     }
 }

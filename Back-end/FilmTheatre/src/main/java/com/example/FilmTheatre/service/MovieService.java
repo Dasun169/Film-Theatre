@@ -8,4 +8,6 @@ public interface MovieService {
     List<Movie> getAllMovies();
     void saveMovieIfNotExists(Movie movie);
     Optional<Movie> getMovieByTitle(String title);
+
+    List<Movie> searchMoviesByTitle(String title);
 }

@@ -1,0 +1,84 @@
+.pdf-header {
+    background-color: #1B1B1B;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(246, 123, 123, 0.5);
+    border: 2px wheat;
+    margin: 10px 100px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pdf-header h1{
+    color: wheat;
+}
+
+.pdf-detail{
+    background-color: #1B1B1B;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(246, 123, 123, 0.5);
+    border: 2px wheat;
+    margin: 10px 100px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pdf-footer{
+    background-color: #1B1B1B;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(246, 123, 123, 0.5);
+    border: 2px wheat;
+    margin: 10px 100px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pdf-detail{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.pdf-booking-details{
+    padding-left: 20px;
+    width: 40%;
+}
+
+.pdf-qr{
+    text-align: center;
+    width: 40%;
+}
+
+.qr{
+    height: 200px;
+    width: 200px;
+    border: 3px solid white;
+    margin: 20px auto;
+}
+
+.qr canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.pdf-amount{
+    display: flex;
+    justify-content: space-between;
+}
+
+.pdf-footer button {
+    height: 35px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    background-color: #333;
+    color: white;
+    border: 2px solid #1B1B1B;
+    font-size: 15px;
+}
+
+.qr img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

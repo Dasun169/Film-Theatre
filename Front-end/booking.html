@@ -6,8 +6,17 @@
     <title>Booking-html</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gupter:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
 </head>
 <body>
     <div class="header">
@@ -157,8 +166,11 @@
                 <label for="expiryYear">Expiry:</label>
                 <input type="text" id="expiryYear" name="expiryYear" placeholder="MM/YY" required>
     
-                <label for="cvv">CVV:</label>
-                <input type="password" id="cvv" name="cvv" placeholder="CVV" required>
+                <div style="height: 110px;">
+                    <p>Ticket price : LKR. <span id="ticket-price"></span>.00</p>
+                    <p>Booking Fee : LKR. <span id="booking-fee"></span>.00</p>
+                    <p>Total Fee : LKR.<span id="total-fee"></span>.00</p>
+                </div>
     
                 <button type="submit">Submit Payment</button>
             </form>
@@ -167,37 +179,52 @@
 
 
     <div class="footer">
-        <table class="footer-table">
-            <tr>
-                <th>GENERAL</th>
-                <th>&nbsp;</th>
-                <th>SOCIAL MEDIA</th>
-            </tr>
-            <tr>
-                <td>
-                    <ul>
-                        <li><a href="">ABOUT US</a></li>
-                        <li><a href="">FAQ'S</a></li>
-                        <li><a href="">FEEDBACK</a></li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li><a href="">PRIVACY & POLICY</a></li>
-                        <li><a href="">TERMS & CONDITIONS</a></li>
-                        <li><a href="">TERMS OF USE</a></li>
-                    </ul>
-                </td>
-                <td>
-                    <div>
-                        <a href="" class="fa fa-facebook"></a>
-                        <a href="" class="fa fa-twitter"></a>
-                        <a href="" class="fa fa-linkedin"></a>
-                        <a href="" class="fa fa-instagram"></a>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="footer-container">
+            <div class="item1 item">
+                <h3>GENERAL</h3>
+                <a href="">About Us</a> | <a href="">FAQ'S</a> | <a href="">Feedback</a> | <br>
+                <a href="">Privancy Policy</a> | <a href="">Terms & Conditions</a> | <br>
+            </div>
+            <div class="itme2 item">
+                <h3>POPULAR MOVIES BY LANGUAGE</h3>
+                <a href="">Latest Sinhala Movies</a> <br>
+                <a href="">Latest English Movies</a> <br>
+                <a href="">Latest Hindi Movies</a> <br>
+                <a href="">Latest Tamil Movies</a> <br>
+            </div>
+            <div class="item3 item">
+                <h3>MOVIES BY GENRE</h3>
+                <a href="">Best Action Movies</a> | <a href="">Best Romantic Movies</a> | <br>
+                <a href="">Best Comedy Movies</a> | <a href="">Best Adventure Movies</a> | <br>
+                <a href="">Best Biography Movies</a> | <a href="">Best Crime Movies</a> | <br>
+                <a href="">Best Drama Movies</a> | <a href="">Best Family Movies</a> | <br>
+                <a href="">Best Fantasy Movies</a> | <a href="">Best History Movies</a> | <br>
+                <a href="">Best Musical Movies</a> | <a href="">Best Mystery Movies</a> | <br>
+                <a href="">Best Thriller Movies</a> <br>
+            </div>
+            <div class="item4 item">
+                <h3>SOCIAL MEDIA</h3>
+                <div class="image-sm">
+                    <a href=""><img id="instagram" src="Images/instagram.png" alt=""></a>
+                    <a href=""><img src="Images/whatsapp.png" alt=""></a>
+                    <a href=""><img src="Images/youtube.png" alt=""></a>
+                </div>
+                <div class="image-sm">
+                    <a href=""><img src="Images/linkedin.png" alt=""></a>
+                    <a href=""><img src="Images/github.png" alt=""></a>
+                    <a href=""><img src="Images/twitter.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="credits">
+            <hr>
+            Copyright © 2024 A.Dasun Navindu Dewnith Nandasiri All Rights Reserved. <br>
+            The content and images used on this site are copyright protected and copyrights vests with the respective
+            owners. The
+            usage of the content and images on this website is intended to promote the works and no endorsement of the
+            artist shall <br>
+            be implied. Unauthorized use is prohibited and punishable by law. <br>
+        </div>
     </div>
 
     <script>
@@ -208,8 +235,14 @@
         let numOfSeats = parseInt(urlParams.get('numSeats'), 10);
         let bookingId;
         let selectedSeats = [];
+        let totalFee;
 
         document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('ticket-price').innerHTML = numOfSeats * 500;
+            document.getElementById('booking-fee').innerHTML = 140;
+            totalFee = (numOfSeats * 500) + 140;
+            document.getElementById('total-fee').innerHTML = totalFee;
+            
             const prefix = "STC";
             let currentNumber = localStorage.getItem('currentBookingId') || 1; 
             bookingId = prefix + String(currentNumber).padStart(6, '0'); 
@@ -231,7 +264,7 @@
                     seatNos.forEach(seatNo => {
                         const seatButton = document.getElementById(`${seatNo}`);
                         if (seatButton) {
-                            seatButton.style.backgroundColor = 'orange';  
+                            seatButton.style.backgroundColor = '#996633';  
                             seatButton.disabled = true;  
                         }
                     });
@@ -240,17 +273,14 @@
                 .catch(error => {
                     console.error("Error fetching seat numbers:", error);
                 });
-            
-            
 
-
-            
+                
             const seatButtons = document.querySelectorAll('.seat');
             seatButtons.forEach(seatButton => {
                 seatButton.addEventListener('click', function () {
                     if (this.disabled) return;
 
-                    if (this.style.backgroundColor === 'orange') {
+                    if (this.style.backgroundColor === '#27190c') {
                         this.style.backgroundColor = ''; 
                         const index = selectedSeats.indexOf(this.id);
                         if (index > -1) {
@@ -258,7 +288,7 @@
                         }
                     } else {
                         if (selectedSeats.length < numOfSeats) {
-                            this.style.backgroundColor = 'orange'; 
+                            this.style.backgroundColor = '#27190c'; 
                             selectedSeats.push(this.id); 
                         } else {
                             alert(`You can only select ${numOfSeats} seats.`);
@@ -326,8 +356,19 @@
                         return response.json();
                     })
                     .then(bookingResponse => {
-                        alert('Booking Successful!');
                         console.log('Seat Booking Data Submitted:', bookingResponse);
+                        alert('Booking Successfully!');
+
+                        const queryParams = new URLSearchParams({
+                            title: title,
+                            timeSlot: timeSlot,
+                            movieDate: movieDate,
+                            numOfSeats: numOfSeats,
+                            bookingId: bookingId,
+                            totalFee: totalFee
+                        }).toString();
+
+                        window.location.replace(`ticket-pdf.html?${queryParams}`);
                     })
                     .catch(error => {
                         alert('Error during booking submission');

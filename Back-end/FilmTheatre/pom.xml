@@ -7,6 +7,11 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
+
+		<dependency>
+			<groupId>mysql</groupId> <!-- Use your DB driver -->
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>FilmTheatre</artifactId>
@@ -44,6 +49,7 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

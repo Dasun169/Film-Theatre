@@ -6,8 +6,16 @@
     <title>Book Ticket</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gupter:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 <body>
     <div class="header">
@@ -54,37 +62,52 @@
     </div>
 
     <div class="footer">
-        <table class="footer-table">
-            <tr>
-                <th>GENERAL</th>
-                <th>&nbsp;</th>
-                <th>SOCIAL MEDIA</th>
-            </tr>
-            <tr>
-                <td>
-                    <ul>
-                        <li><a href="">ABOUT US</a></li>
-                        <li><a href="">FAQ'S</a></li>
-                        <li><a href="">FEEDBACK</a></li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li><a href="">PRIVACY & POLICY</a></li>
-                        <li><a href="">TERMS & CONDITIONS</a></li>
-                        <li><a href="">TERMS OF USE</a></li>
-                    </ul>
-                </td>
-                <td>
-                    <div>
-                        <a href="" class="fa fa-facebook"></a>
-                        <a href="" class="fa fa-twitter"></a>
-                        <a href="" class="fa fa-linkedin"></a>
-                        <a href="" class="fa fa-instagram"></a>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="footer-container">
+            <div class="item1 item">
+                <h3>GENERAL</h3>
+                <a href="">About Us</a> | <a href="">FAQ'S</a> | <a href="">Feedback</a> | <br>
+                <a href="">Privancy Policy</a> | <a href="">Terms & Conditions</a> | <br>
+            </div>
+            <div class="itme2 item">
+                <h3>POPULAR MOVIES BY LANGUAGE</h3>
+                <a href="">Latest Sinhala Movies</a> <br>
+                <a href="">Latest English Movies</a> <br>
+                <a href="">Latest Hindi Movies</a> <br>
+                <a href="">Latest Tamil Movies</a> <br>
+            </div>
+            <div class="item3 item">
+                <h3>MOVIES BY GENRE</h3>
+                <a href="">Best Action Movies</a> | <a href="">Best Romantic Movies</a> | <br>
+                <a href="">Best Comedy Movies</a> | <a href="">Best Adventure Movies</a> | <br>
+                <a href="">Best Biography Movies</a> | <a href="">Best Crime Movies</a> | <br>
+                <a href="">Best Drama Movies</a> | <a href="">Best Family Movies</a> | <br>
+                <a href="">Best Fantasy Movies</a> | <a href="">Best History Movies</a> | <br>
+                <a href="">Best Musical Movies</a> | <a href="">Best Mystery Movies</a> | <br>
+                <a href="">Best Thriller Movies</a> <br>
+            </div>
+            <div class="item4 item">
+                <h3>SOCIAL MEDIA</h3>
+                <div class="image-sm">
+                    <a href=""><img id="instagram" src="Images/instagram.png" alt=""></a>
+                    <a href=""><img src="Images/whatsapp.png" alt=""></a>
+                    <a href=""><img src="Images/youtube.png" alt=""></a>
+                </div>
+                <div class="image-sm">
+                    <a href=""><img src="Images/linkedin.png" alt=""></a>
+                    <a href=""><img src="Images/github.png" alt=""></a>
+                    <a href=""><img src="Images/twitter.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="credits">
+            <hr>
+            Copyright © 2024 A.Dasun Navindu Dewnith Nandasiri All Rights Reserved. <br>
+            The content and images used on this site are copyright protected and copyrights vests with the respective
+            owners. The
+            usage of the content and images on this website is intended to promote the works and no endorsement of the
+            artist shall <br>
+            be implied. Unauthorized use is prohibited and punishable by law. <br>
+        </div>
     </div>
     
     <script>
@@ -209,7 +232,7 @@
                 })
                 .then(data => {
                     const ticketId = data.id;
-                    window.location.href = `booking.html?title=${encodeURIComponent(title)}&movieDate=${encodeURIComponent(movieDate)}&numSeats=${encodeURIComponent(numSeats) }&timeSlot=${encodeURIComponent(timeSlot) }`;
+                    window.location.replace(`booking.html?title=${encodeURIComponent(title)}&movieDate=${encodeURIComponent(movieDate)}&numSeats=${encodeURIComponent(numSeats) }&timeSlot=${encodeURIComponent(timeSlot) }`);
                 })
                 .catch(error => {
                     console.error('Error:', error);

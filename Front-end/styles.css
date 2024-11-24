@@ -29,18 +29,13 @@ body{
 .movie-info {
     position: absolute;
     bottom: 10px;
-    /* Moved lower on the image */
     left: 15px;
     color: #fff;
-    /*padding: 5px;*/
     font-family: 'Poppins', sans-serif;
-    /* Stylish font */
     text-align: left;
     transition: opacity 0.3s ease;
     background: none;
-    /* No background color */
     text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.973);
-    /* Increased shadow effect */
 }
 
 .buttons {
@@ -121,65 +116,6 @@ body{
     border-color: #333;
 }
 
-.fa {
-    padding: 20px;
-    text-align: center;
-    margin: 5px 1px;
-    font-size: 2s0px;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-}
-
-.fa-facebook {
-    background: #3B5998;
-    color: white;
-}
-
-.fa-twitter {
-    background: #55ACEE;
-    color: white;
-}
-
-.fa-linkedin {
-    background: #007bb5;
-    color: white;
-}
-
-.fa-instagram {
-    background: #125688;
-    color: white;
-}
-
-.footer{
-    background-color: #1B1B1B;
-    margin-top: 30px;
-}
-
-.footer-table{
-    width: 80%;
-    text-align: left;
-    margin: 0 auto;
-    font-family: 'Poppins', sans-serif;
-    padding-top: 30px;
-    padding-left: 250px;
-}
-
-.footer-table a{
-    text-decoration: none;
-    color: white;
-    font-size: 10px;
-}
-
-.footer-table th{
-    color: orange;
-    font-size: 13px;
-}
-
-.footer-table li{
-    list-style-type: none;
-}
-
 .boo-ticket-container{
     text-align: center;
     display: flex;
@@ -242,12 +178,6 @@ body{
     border: 2px solid #1B1B1B;
 }
 
-
-
-
-
-
-
 .seat-body {
     display: flex;
     justify-items: center;
@@ -297,7 +227,7 @@ body{
 }
 
 .seat:hover {
-    background-color: orange;
+    background-color: #27190c;
 }
 
 #paymentForm {
@@ -345,4 +275,53 @@ body{
 
 #paymentForm button:hover {
     background-color: #555;
+}
+
+.footer{
+    background-color: #1B1B1B;
+    margin-top: 30px;
+    
+}
+
+.footer-container{
+    display: flex;
+    justify-content: space-evenly;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: thin;
+    font-family: "Work Sans", sans-serif;
+}
+
+.footer-container a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-container a:hover{
+    text-decoration: underline;
+}
+
+.footer-container h3{
+    font-family: 'Poppins', sans-serif;
+    color: rgba(255, 165, 0, 0.8);
+}
+
+.item{
+    padding-bottom: 20px;
+}
+
+.item4 img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.credits{
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: "Work Sans", sans-serif;
+    font-size: 11px;
+}
+
+.credits hr{
+    color: rgba(255, 255, 255, 0.4);
 }

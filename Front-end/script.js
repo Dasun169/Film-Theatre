@@ -41,6 +41,10 @@ async function loadMovies() {
   }
 }
 
-
-
 window.onload = loadMovies;
+
+
+
+
+
+
